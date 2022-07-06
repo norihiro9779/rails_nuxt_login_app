@@ -5,19 +5,13 @@ FROM ruby:2.7.2-alpine
 # Dockerfile内で使用する変数を定義
 # app
 ARG WORKDIR
-
+ARG RUNTIME_PACKAGES="nodejs tzdata postgresql-dev postgresql git"
+ARG DEV_PACKAGES="build-base curl-dev"
 # 環境変数を定義(Dockerfile, コンテナ参照可)
 # Rails ENV["TZ"] => Asia/Tokyo
-ENV RUNTIME_PACKAGES="linux-headers libxml2-dev make gcc libc-dev nodejs tzdata postgresql-dev postgresql git" \
-    DEV_PACKAGES="build-base curl-dev" \
-    # /app
-    HOME=/${WORKDIR} \
+ENV HOME=/${WORKDIR} \
     LANG=C.UTF-8 \
     TZ=Asia/Tokyo
-
-# ベースイメージに対してコマンドを実行する
-# ${HOME} or $HOME => /app
-RUN echo ${HOME}
 
 # Dockerfile内で指定した命令を実行する ... RUN, COPY, ADD, ENTORYPOINT, CMD
 # 作業ディレクトリを定義
