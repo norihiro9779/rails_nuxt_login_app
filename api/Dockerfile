@@ -33,6 +33,7 @@ RUN apk update && \
     # apk add = パッケージのインストールを実行
     # --no-cache = パッケージをキャッシュしない(Dockerイメージを軽量化)
     apk add --no-cache ${RUNTIME_PACKAGES} && \
+    apk add --no-cache gcompat && \
     # --virtual 名前(任意) = 仮想パッケージ
     apk add --virtual build-dependencies --no-cache ${DEV_PACKAGES} && \
     # Gemのインストールコマンド
